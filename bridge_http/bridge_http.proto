@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package bridgeHTTP;
+
+option go_package = "grpc_tets/proto/bridge_http";
+
+service PgCall {
+  rpc HitPg (HitRequest) returns (HitResponse);
+}
+
+message HitRequest {
+  string vendor = 1;
+  string username = 2;
+  string password = 3;
+  string reqType = 4;
+}
+
+message HitResponse {
+  bytes response = 1;
+  map<string, string> headers = 2;
+  string errorMessage = 3;
+  int32 statusCode = 4;
+}
