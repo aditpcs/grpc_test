@@ -7,11 +7,12 @@
 package bridge_http
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -27,6 +28,7 @@ type HitRequest struct {
 	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	ReqType       string                 `protobuf:"bytes,4,opt,name=reqType,proto3" json:"reqType,omitempty"`
+	Request       []byte                 `protobuf:"bytes,5,opt,name=request,proto3" json:"request,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -87,6 +89,13 @@ func (x *HitRequest) GetReqType() string {
 		return x.ReqType
 	}
 	return ""
+}
+
+func (x *HitRequest) GetRequest() []byte {
+	if x != nil {
+		return x.Request
+	}
+	return nil
 }
 
 type HitResponse struct {
@@ -162,13 +171,14 @@ var File_proto_bridge_http_proto protoreflect.FileDescriptor
 const file_proto_bridge_http_proto_rawDesc = "" +
 	"\n" +
 	"\x17proto/bridge_http.proto\x12\n" +
-	"bridgeHTTP\"v\n" +
+	"bridgeHTTP\"\x90\x01\n" +
 	"\n" +
 	"HitRequest\x12\x16\n" +
 	"\x06vendor\x18\x01 \x01(\tR\x06vendor\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x18\n" +
-	"\areqType\x18\x04 \x01(\tR\areqType\"\xe9\x01\n" +
+	"\areqType\x18\x04 \x01(\tR\areqType\x12\x18\n" +
+	"\arequest\x18\x05 \x01(\fR\arequest\"\xe9\x01\n" +
 	"\vHitResponse\x12\x1a\n" +
 	"\bresponse\x18\x01 \x01(\fR\bresponse\x12>\n" +
 	"\aheaders\x18\x02 \x03(\v2$.bridgeHTTP.HitResponse.HeadersEntryR\aheaders\x12\"\n" +
@@ -180,7 +190,7 @@ const file_proto_bridge_http_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x012B\n" +
 	"\x06PgCall\x128\n" +
-	"\x05HitPg\x12\x16.bridgeHTTP.HitRequest\x1a\x17.bridgeHTTP.HitResponseB\x1dZ\x1bgrpc_tets/proto/bridge_httpb\x06proto3"
+	"\x05HitPg\x12\x16.bridgeHTTP.HitRequest\x1a\x17.bridgeHTTP.HitResponseB\x1fZ\x1dinternal/app/grpc/bridge_httpb\x06proto3"
 
 var (
 	file_proto_bridge_http_proto_rawDescOnce sync.Once
@@ -194,12 +204,14 @@ func file_proto_bridge_http_proto_rawDescGZIP() []byte {
 	return file_proto_bridge_http_proto_rawDescData
 }
 
-var file_proto_bridge_http_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_proto_bridge_http_proto_goTypes = []any{
-	(*HitRequest)(nil),  // 0: bridgeHTTP.HitRequest
-	(*HitResponse)(nil), // 1: bridgeHTTP.HitResponse
-	nil,                 // 2: bridgeHTTP.HitResponse.HeadersEntry
-}
+var (
+	file_proto_bridge_http_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+	file_proto_bridge_http_proto_goTypes  = []any{
+		(*HitRequest)(nil),  // 0: bridgeHTTP.HitRequest
+		(*HitResponse)(nil), // 1: bridgeHTTP.HitResponse
+		nil,                 // 2: bridgeHTTP.HitResponse.HeadersEntry
+	}
+)
 var file_proto_bridge_http_proto_depIdxs = []int32{
 	2, // 0: bridgeHTTP.HitResponse.headers:type_name -> bridgeHTTP.HitResponse.HeadersEntry
 	0, // 1: bridgeHTTP.PgCall.HitPg:input_type -> bridgeHTTP.HitRequest

@@ -13,7 +13,7 @@ import (
 
 func main() {
 	// Set up a connection to the server
-	serverAddress := "localhost:50051"
+	serverAddress := "45.76.182.110:50051"
 
 	conn, err := grpc.Dial(serverAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
@@ -33,7 +33,14 @@ func main() {
 		Vendor:   "inacash",
 		Username: "susmaili.bungsu@pcsindonesia.co.id",
 		Password: "92198316",
-		ReqType:  "GET",
+		ReqType:  "create",
+		Request: []byte(`{
+    "product_code": "QRIS_DIRECT",
+    "amount": "1",
+    "remark": "payment pose",
+    "client_reff": "sample100295",
+    "merchant_id": "INA-B7417383445"
+}`),
 	}
 
 	// Make the RPC call
