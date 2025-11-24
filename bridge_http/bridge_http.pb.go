@@ -29,6 +29,7 @@ type HitRequest struct {
 	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	ReqType       string                 `protobuf:"bytes,4,opt,name=reqType,proto3" json:"reqType,omitempty"`
 	Request       []byte                 `protobuf:"bytes,5,opt,name=request,proto3" json:"request,omitempty"`
+	TokenFcm      string                 `protobuf:"bytes,6,opt,name=tokenFcm,proto3" json:"tokenFcm,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -96,6 +97,13 @@ func (x *HitRequest) GetRequest() []byte {
 		return x.Request
 	}
 	return nil
+}
+
+func (x *HitRequest) GetTokenFcm() string {
+	if x != nil {
+		return x.TokenFcm
+	}
+	return ""
 }
 
 type HitResponse struct {
@@ -171,14 +179,15 @@ var File_proto_bridge_http_proto protoreflect.FileDescriptor
 const file_proto_bridge_http_proto_rawDesc = "" +
 	"\n" +
 	"\x17proto/bridge_http.proto\x12\n" +
-	"bridgeHTTP\"\x90\x01\n" +
+	"bridgeHTTP\"\xac\x01\n" +
 	"\n" +
 	"HitRequest\x12\x16\n" +
 	"\x06vendor\x18\x01 \x01(\tR\x06vendor\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x18\n" +
 	"\areqType\x18\x04 \x01(\tR\areqType\x12\x18\n" +
-	"\arequest\x18\x05 \x01(\fR\arequest\"\xe9\x01\n" +
+	"\arequest\x18\x05 \x01(\fR\arequest\x12\x1a\n" +
+	"\btokenFcm\x18\x06 \x01(\tR\btokenFcm\"\xe9\x01\n" +
 	"\vHitResponse\x12\x1a\n" +
 	"\bresponse\x18\x01 \x01(\fR\bresponse\x12>\n" +
 	"\aheaders\x18\x02 \x03(\v2$.bridgeHTTP.HitResponse.HeadersEntryR\aheaders\x12\"\n" +

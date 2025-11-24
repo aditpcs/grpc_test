@@ -14,8 +14,9 @@ import (
 func main() {
 	// Set up a connection to the server
 	serverAddress := "45.76.182.110:50051"
+	// serverAddress := "localhost:50051"
 
-	conn, err := grpc.Dial(serverAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(serverAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("Failed to connect: %v", err)
 	}
@@ -38,9 +39,11 @@ func main() {
     "product_code": "QRIS_DIRECT",
     "amount": "1",
     "remark": "payment pose",
-    "client_reff": "sample100295",
+    "client_reff": "sample10030495",
     "merchant_id": "INA-B7417383445"
-}`),
+}`,
+		),
+		TokenFcm: "eb9eSlxIQaeQhtp2vbp2Vz:APA91bHs3MHpRQMVOoTjSmdq5qLOhpGlQyMeuDxNcF-FtC24_WXmFqizpRZ5zQKkcvO0sLDQ6mT-CAxy3Sc50wUTH4x3cBifjD8WScEt_Pyh8yCYEBKcnrY",
 	}
 
 	// Make the RPC call
